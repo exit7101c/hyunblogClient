@@ -1,11 +1,14 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.blog {
+  background-color: #61dafb;
+  display: flex;
+  color: white;
+  padding: 20px;
+  width: 100%;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
