@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
-import CategoryType from './categoryType';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Header = () => {
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [categories, setCategories] = useState([]);
 
-    const handleCategoryChange = (category) => {
-        // 선택한 카테고리 처리 로직 추가
-        console.log('Selected category:', category);
-        setSelectedCategory(category);
-    };
+    useEffect(() => {
+        // Fetch categories data here
+        axios.get('http://localhost:8080/hb/category/main')  // Adjust the API endpoint accordingly
+            .then(response => {
+                setCategories(response.data);
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <header className="header">
-            <a href="/">홈</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/board">게시판</a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <CategoryType categoryType="main" onCategoryChange={handleCategoryChange} />
+            {categories.map(category => (
+                <React.Fragment key={category.categoryId}>
+                    <Link to={category.url === '/' ? '/' : '/board'}>{category.categoryName}</Link>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                </React.Fragment>
+            ))}
         </header>
     );
 };

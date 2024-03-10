@@ -1,32 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const CategoryType = ({ categoryType, onCategoryChange }) => {
-    const [categories, setCategories] = useState([]);
+const CategoryType = ({ categoryType }) => {
+    // 상태 초기화
+    const [categoryData, setCategoryData] = useState(null);
 
     useEffect(() => {
-        // 카테고리를 불러오는 API 호출
-        axios.get(`/hb/category/${categoryType}`)
-            .then(response => {
-                setCategories(response.data);
+        // 데이터 로딩
+        axios.get(`http://localhost:8080/hb/category/${categoryType}`)
+            .then(function (response) {
+                // 성공 핸들링
+                console.log(response.data);
+                setCategoryData(response.data);
             })
-            .catch(error => {
-                console.error('Error fetching categories:', error);
+            .catch(function (error) {
+                // 에러 핸들링
+                console.log(error);
+            })
+            .finally(function () {
+                // 항상 실행되는 영역
             });
-    }, [categoryType]);
+    }, [categoryType]); // categoryType이 변경될 때마다 useEffect 다시 실행
 
-    const handleCategoryChange = (selectedCategory) => {
-        // 선택한 카테고리를 부모 컴포넌트로 전달
-        onCategoryChange(selectedCategory);
-    };
+    if (!categoryData) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <div className="category">
-            {categories.map(category => (
-                <button key={category.id} onClick={() => handleCategoryChange(category)}>
-                    {category.name}
-                </button>
-            ))}
+        <div>
+            <HeaderComponent categoryData={categoryData} />
+        </div>
+    );
+};
+
+// Header 부분을 별도의 컴포넌트로 추출
+const HeaderComponent = ({ categoryData }) => {
+
+    return (
+        <div>
+            {categoryData.title}
         </div>
     );
 };
