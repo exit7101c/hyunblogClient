@@ -11,8 +11,8 @@ function App() {
             <Header />
             {/*<Routers />*/}
             <Routes>
-                <Route exact={true} path="/" element={<Home />} />
-                <Route exact={true} path="/board" element={<BoardList />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/board" element={<BoardList />} />
             </Routes>
         </div>
     );
