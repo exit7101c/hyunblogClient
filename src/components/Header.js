@@ -19,10 +19,10 @@ const Header = () => {
 
     return (
         <header className="header">
-            {categories.map(category => (
+            {categories.map((category,index) => (
                 <React.Fragment key={category.categoryId}>
                     <Link to={category.url === '/' ? '/' : '/board'}>{category.categoryName}</Link>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {index !== categories.length - 1 && <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>}
                 </React.Fragment>
             ))}
         </header>
