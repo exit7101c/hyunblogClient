@@ -6,7 +6,7 @@ const BoardList = () => {
     return (
         <div>
             <div>
-                게시판 목록 출력
+                Board
             </div>
         </div>
     );

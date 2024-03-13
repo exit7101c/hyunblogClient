@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <div>
             <Profile />
-            홈 화면 입니다.
+            Home
         </div>
     );
 };
