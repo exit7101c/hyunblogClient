@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { HiHome, HiOutlineViewBoards, HiOutlineLogin } from "react-icons/hi";
 import { url } from '../common/com'
+
 const Header = () => {
     const [categories, setCategories] = useState([]);
-
+    console.log(url)
     useEffect(() => {
         // Fetch categories data here
         axios.get(`${url}/hb/category/main`)  // Adjust the API endpoint accordingly
